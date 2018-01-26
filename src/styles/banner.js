@@ -10,8 +10,10 @@ export default function banner() {
     material.header(),
     material.negateContainerPadding(),
     material.elevation.appBar(),
-    el => el.style.paddingLeft = '16px',
-    el => el.style.paddingRight = '16px',
+    el => el.style.position = 'sticky',
+    el => el.style.top = '0px',
+    material.padding.left('16px'),
+    material.padding.right('16px'),
     el => el.style.minHeight = '64px'
   ];
 }

@@ -16,6 +16,7 @@ function isPage() {
 export default Object.assign({
   isLabelFor: isLabelFor,
   isPage: isPage,
+  isInContext: name => `[data-jsua-context~=${name}] *`,
   isApplicationRoot: () => el => el.parentElement.matches('[data-jsua-context~=app]'),
   hasStandingLine: () => el => el.hasAttribute("data-jsua-material-standing-line"),
   shouldNegateContainerPadding: () => el => el.hasAttribute('data-jsua-material-negate-padding')

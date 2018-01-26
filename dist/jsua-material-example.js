@@ -7672,6 +7672,9 @@ function isPage() {
 exports.default = Object.assign({
   isLabelFor: isLabelFor,
   isPage: isPage,
+  isInContext: function isInContext(name) {
+    return '[data-jsua-context~=' + name + '] *';
+  },
   isApplicationRoot: function isApplicationRoot() {
     return function (el) {
       return el.parentElement.matches('[data-jsua-context~=app]');
@@ -7689,7 +7692,7 @@ exports.default = Object.assign({
   }
 }, style.filters);
 
-},{"@lynx-json/jsua-lynx":20,"@lynx-json/jsua-style":93}],51:[function(require,module,exports){
+},{"@lynx-json/jsua-lynx":20,"@lynx-json/jsua-style":98}],51:[function(require,module,exports){
 'use strict';
 
 var _jsuaStyle = require('@lynx-json/jsua-style');
@@ -7720,18 +7723,16 @@ var jsua = window.jsua || require('@lynx-json/jsua');
 
 
 jsua.finishing.register('jsua-styling-example', function stylesheet(result) {
-  (0, _jsuaStyle.query)(result.view).each([
-  // Concealed/Revealed
-  (0, _jsuaStyle.select)('[data-lynx-visibility=concealed], [data-lynx-visibility=revealed]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked('[data-lynx-hints~=set]'), (0, _util.lockStyle)('concealed-revealed-set', styles.expansionPanel.set())), (0, _jsuaStyle.filter)(_filters2.default.unlocked('[data-lynx-hints~=list]'), (0, _util.lockStyle)('concealed-revealed-list', styles.expansionPanel.list())), (0, _jsuaStyle.filter)(_filters2.default.unlocked('[data-lynx-hints~=group]'), (0, _util.lockStyle)('concealed-revealed-group', styles.expansionPanel.group())), (0, _jsuaStyle.filter)(_filters2.default.unlocked('[data-lynx-hints~=complement]'), (0, _util.lockStyle)('concealed-revealed-complement', styles.expansionPanel.complement())), (0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('concealed-revealed-default', styles.expansionPanel.container()))]),
+  (0, _jsuaStyle.query)(result.view).each([(0, _jsuaStyle.select)(_filters2.default.unlocked('[data-lynx-hints~=banner]'), (0, _util.lockStyle)('banner', styles.banner())), (0, _jsuaStyle.select)('[data-lynx-visibility=concealed], [data-lynx-visibility=revealed]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked('[data-lynx-hints~=set]'), (0, _util.lockStyle)('concealed-revealed-set', styles.expansionPanel.set())), (0, _jsuaStyle.filter)(_filters2.default.unlocked('[data-lynx-hints~=list]'), (0, _util.lockStyle)('concealed-revealed-list', styles.expansionPanel.list())), (0, _jsuaStyle.filter)(_filters2.default.unlocked('[data-lynx-hints~=group]'), (0, _util.lockStyle)('concealed-revealed-group', styles.expansionPanel.group())), (0, _jsuaStyle.filter)(_filters2.default.unlocked('[data-lynx-hints~=complement]'), (0, _util.lockStyle)('concealed-revealed-complement', styles.expansionPanel.complement())), (0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('concealed-revealed', styles.expansionPanel.container()))]),
 
   // General Styling
-  (0, _jsuaStyle.filter)(_filters2.default.isApplicationRoot(), styles.body()), (0, _jsuaStyle.filter)(_filters2.default.isPage(), (0, _util.lockStyle)('page', [material.container(), material.padding('16px')])), (0, _jsuaStyle.select)('[data-lynx-hints~=complement]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('complement-default', styles.complement()))]), (0, _jsuaStyle.select)('[data-lynx-hints~=table]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('table-default', material.table.auto()))]), (0, _jsuaStyle.select)('[data-lynx-hints~=header]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked(_filters2.default.has(_mappers2.default.realParent('[data-lynx-hints~=table]'))), (0, _util.lockStyle)('default-table-header', material.tableRow.auto())), (0, _jsuaStyle.filter)(_filters2.default.unlocked('[data-lynx-hints~=banner]'), (0, _util.lockStyle)('default-banner', styles.banner())), (0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('header-default', material.header()))]), (0, _jsuaStyle.select)('[data-lynx-hints~=footer]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('footer-default', material.footer()))]), (0, _jsuaStyle.select)('[data-lynx-hints~=set]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('set-default', material.set.auto()))]), (0, _jsuaStyle.select)('[data-lynx-hints~=list]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('list-default', material.list()))]), (0, _jsuaStyle.select)('[data-lynx-hints~=group]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked(_filters2.default.has(_mappers2.default.realParent('[data-lynx-hints~=table]'))), (0, _util.lockStyle)('default-table-row', material.tableRow.auto())), (0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('group-default', material.group()))]), (0, _jsuaStyle.select)('[data-lynx-hints~=card]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('card-default', material.card()))]), (0, _jsuaStyle.select)('[data-lynx-hints~=container], [data-lynx-hints~=form]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('container-default', material.container()))]), (0, _jsuaStyle.select)('[data-lynx-hints~=link], [data-lynx-hints~=submit]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('control-default', material.group({ alignItems: 'center', gap: '8px' })))]), (0, _jsuaStyle.select)('[data-lynx-hints~=label]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('label-default', material.text.subheading()))]), (0, _jsuaStyle.select)('[data-lynx-hints~=image]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('image-default', styles.image()))]),
+  (0, _jsuaStyle.filter)(_filters2.default.isApplicationRoot(), styles.body()), (0, _jsuaStyle.filter)(_filters2.default.isPage(), (0, _util.lockStyle)('page', styles.page())), (0, _jsuaStyle.select)('[data-lynx-hints~=complement]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('complement', styles.complement()))]), (0, _jsuaStyle.select)('[data-lynx-hints~=table]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('table', styles.table()))]), (0, _jsuaStyle.select)('[data-lynx-hints~=header]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked(_filters2.default.has(_mappers2.default.realParent('[data-lynx-hints~=table]'))), (0, _util.lockStyle)('default-table-header', material.tableRow.auto())), (0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('header', material.header()))]), (0, _jsuaStyle.select)('[data-lynx-hints~=footer]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('footer', material.footer()))]), (0, _jsuaStyle.select)('[data-lynx-hints~=set]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('set', material.set.auto()))]), (0, _jsuaStyle.select)('[data-lynx-hints~=list]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('list', material.list()))]), (0, _jsuaStyle.select)('[data-lynx-hints~=group]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked(_filters2.default.has(_mappers2.default.realParent('[data-lynx-hints~=table]'))), (0, _util.lockStyle)('default-table-row', material.tableRow.auto())), (0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('group', material.group()))]), (0, _jsuaStyle.select)('[data-lynx-hints~=card]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('card', material.card({ footerMapper: _mappers2.default.last(_mappers2.default.footers()) })))]), (0, _jsuaStyle.select)('[data-lynx-hints~=container], [data-lynx-hints~=form]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('container', material.container()))]), (0, _jsuaStyle.select)('[data-lynx-hints~=link], [data-lynx-hints~=submit]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('control', material.group({ alignItems: 'center', gap: '8px' })))]), (0, _jsuaStyle.select)('[data-lynx-hints~=text][data-lynx-input]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('text-input', styles.textInput()))]), (0, _jsuaStyle.select)('[data-lynx-hints~=label]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked(_filters2.default.isLabelFor('page')), (0, _util.lockStyle)('label-page', material.text.headline())), (0, _jsuaStyle.filter)(_filters2.default.unlocked(_filters2.default.isLabelFor('text-input')), (0, _util.lockStyle)('label-text-input', material.text.caption())), (0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('label', material.text.subheading()))]), (0, _jsuaStyle.select)('[data-lynx-hints~=image]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked(), (0, _util.lockStyle)('image', styles.image()))]),
 
   // Selectables
-  (0, _jsuaStyle.select)('[data-lynx-hints~=link], [data-lynx-hints~=submit]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked('selectable', '*'), (0, _util.lockSelectable)('selectable-default', styles.selectable.highlightLabel()))]), _jsuaStyle.applyAdjustments]);
+  (0, _jsuaStyle.select)('[data-lynx-hints~=link], [data-lynx-hints~=submit]', [(0, _jsuaStyle.filter)(_filters2.default.unlocked('selectable', _filters2.default.isInContext('banner')), (0, _util.lockSelectable)('selectable-in-banner', styles.selectable.inBanner())), (0, _jsuaStyle.filter)(_filters2.default.unlocked('selectable', _filters2.default.isInContext('footer')), (0, _util.lockSelectable)('selectable-in-footer', material.flatButton({ color: 'Blue', labelMapper: _mappers2.default.label() }))), (0, _jsuaStyle.filter)(_filters2.default.unlocked('selectable', '*'), (0, _util.lockSelectable)('selectable', styles.selectable.highlightLabel()))]), _jsuaStyle.applyAdjustments]);
 });
 
-},{"./filters":50,"./mappers":52,"./styles":58,"./util":60,"@lynx-json/jsua":29,"@lynx-json/jsua-material":75,"@lynx-json/jsua-style":93}],52:[function(require,module,exports){
+},{"./filters":50,"./mappers":52,"./styles":59,"./util":64,"@lynx-json/jsua":29,"@lynx-json/jsua-material":79,"@lynx-json/jsua-style":98}],52:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -7773,7 +7774,26 @@ exports.default = Object.assign({
   }
 }, style.mappers);
 
-},{"@lynx-json/jsua-lynx":20,"@lynx-json/jsua-style":93}],53:[function(require,module,exports){
+},{"@lynx-json/jsua-lynx":20,"@lynx-json/jsua-style":98}],53:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
+  all: "",
+  smallScreen: "(max-width: 599px)",
+  smallScreenPortrait: "(max-width: 599px) and (orientation: portrait)",
+  smallScreenLandscape: "(max-width: 599px) and (orientation: landscape)",
+  mediumScreen: "(min-width: 600px) and (max-width: 839px)",
+  mediumScreenPortrait: "(min-width: 600px) and (max-width: 839px) and (orientation: portrait)",
+  mediumScreenLandscape: "(min-width: 600px) and (max-width: 839px) and (orientation: landscape)",
+  largeScreen: "(min-width: 840px)",
+  largeScreenPortrait: "(min-width: 840px) and (orientation: portrait)",
+  largeScreenLandscape: "(min-width: 840px) and (orientation: landscape)"
+};
+
+},{}],54:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -7797,15 +7817,15 @@ function banner() {
   },
   // TODO: Replace with contrast
   material.color({ color: 'White' }), material.header(), material.negateContainerPadding(), material.elevation.appBar(), function (el) {
-    return el.style.paddingLeft = '16px';
+    return el.style.position = 'sticky';
   }, function (el) {
-    return el.style.paddingRight = '16px';
-  }, function (el) {
+    return el.style.top = '0px';
+  }, material.padding.left('16px'), material.padding.right('16px'), function (el) {
     return el.style.minHeight = '64px';
   }];
 }
 
-},{"../colors":49,"@lynx-json/jsua-material":75}],54:[function(require,module,exports){
+},{"../colors":49,"@lynx-json/jsua-material":79}],55:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -7817,7 +7837,7 @@ exports.default = function () {
 
   return [(0, _jsuaStyle.map)(function () {
     return document.body;
-  }, [material.text.body(), material.background.main({ theme: theme }), material.color({ theme: theme })])];
+  }, [material.text(), material.background.main({ theme: theme }), material.color({ theme: theme })])];
 };
 
 var _jsuaMaterial = require('@lynx-json/jsua-material');
@@ -7828,7 +7848,7 @@ var _jsuaStyle = require('@lynx-json/jsua-style');
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-},{"@lynx-json/jsua-material":75,"@lynx-json/jsua-style":93}],55:[function(require,module,exports){
+},{"@lynx-json/jsua-material":79,"@lynx-json/jsua-style":98}],56:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -7849,10 +7869,10 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function complement() {
   return [function (el) {
     return material.background.accent({ backgroundColor: colors.secondary, shade: 'A100' })(el);
-  }, material.border(), material.padding('16px'), material.color({ color: 'Black', opacity: 0.54 }), material.set()];
+  }, material.color({ color: 'Black', opacity: 0.54 }), material.card()];
 }
 
-},{"../colors":49,"@lynx-json/jsua-material":75}],56:[function(require,module,exports){
+},{"../colors":49,"@lynx-json/jsua-material":79}],57:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -7910,7 +7930,7 @@ function container() {
   return [concealedExpansionPanel(), material.container()];
 }
 
-},{"../colors":49,"../mappers":52,"@lynx-json/jsua-material":75,"@lynx-json/jsua-style":93}],57:[function(require,module,exports){
+},{"../colors":49,"../mappers":52,"@lynx-json/jsua-material":79,"@lynx-json/jsua-style":98}],58:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7938,13 +7958,13 @@ function image() {
   }), (0, _jsuaStyle.setState)("normal")];
 }
 
-},{"../mappers":52,"@lynx-json/jsua-style":93}],58:[function(require,module,exports){
+},{"../mappers":52,"@lynx-json/jsua-style":98}],59:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.image = exports.complement = exports.expansionPanel = exports.selectable = exports.body = exports.banner = undefined;
+exports.page = exports.textInput = exports.table = exports.image = exports.complement = exports.expansionPanel = exports.selectable = exports.body = exports.banner = undefined;
 
 var _banner = require('./banner');
 
@@ -7970,6 +7990,18 @@ var _image = require('./image');
 
 var _image2 = _interopRequireDefault(_image);
 
+var _table = require('./table');
+
+var _table2 = _interopRequireDefault(_table);
+
+var _textInput = require('./text-input');
+
+var _textInput2 = _interopRequireDefault(_textInput);
+
+var _page = require('./page');
+
+var _page2 = _interopRequireDefault(_page);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -7980,14 +8012,47 @@ exports.selectable = selectable;
 exports.expansionPanel = expansionPanel;
 exports.complement = _complement2.default;
 exports.image = _image2.default;
+exports.table = _table2.default;
+exports.textInput = _textInput2.default;
+exports.page = _page2.default;
 
-},{"./banner":53,"./body":54,"./complement":55,"./expansion-panel":56,"./image":57,"./selectable":59}],59:[function(require,module,exports){
+},{"./banner":54,"./body":55,"./complement":56,"./expansion-panel":57,"./image":58,"./page":60,"./selectable":61,"./table":62,"./text-input":63}],60:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = page;
+
+var _jsuaStyle = require('@lynx-json/jsua-style');
+
+var _jsuaMaterial = require('@lynx-json/jsua-material');
+
+var material = _interopRequireWildcard(_jsuaMaterial);
+
+var _mediaQueries = require('../media-queries');
+
+var _mediaQueries2 = _interopRequireDefault(_mediaQueries);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function page() {
+  return [material.container(), material.padding('16px'), (0, _jsuaStyle.media)(_mediaQueries2.default.all, [
+  // TODO: This could have performance/memory implications because it calls adjust,
+  // so each time a media query changes, another adjust function is called.
+  material.padding.left('16px'), material.padding.right('16px')]), (0, _jsuaStyle.media)(_mediaQueries2.default.largeScreen, [material.padding.left('15vw'), material.padding.right('15vw')])];
+}
+
+},{"../media-queries":53,"@lynx-json/jsua-material":79,"@lynx-json/jsua-style":98}],61:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.highlightLabel = highlightLabel;
+exports.inBanner = inBanner;
 
 var _jsuaMaterial = require('@lynx-json/jsua-material');
 
@@ -8011,8 +8076,6 @@ function highlightLabel() {
   var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   return [function (el) {
-    return el.style.textDecoration = 'none';
-  }, function (el) {
     return el.style.outline = 'none';
   }, function (el) {
     return el.style.cursor = 'pointer';
@@ -8020,15 +8083,21 @@ function highlightLabel() {
     return el.style.fontWeight = 'normal';
   }, function (el) {
     return el.style.color = 'inherit';
+  }, function (el) {
+    return el.style.textDecoration = 'none';
   }])]), (0, _jsuaStyle.when)('selectable', [(0, _jsuaStyle.map)(_mappers2.default.label(), [function (el) {
     return el.style.fontWeight = 'normal';
   }, material.color({ color: colors.primary, shade: '700' })])]), (0, _jsuaStyle.when)('hover', function (el) {
     if (el.jsuaStyleHasState('selectable')) {
-      material.color({ color: colors.primary, shade: '900' });
+      (0, _jsuaStyle.map)(_mappers2.default.label(), [material.color({ color: colors.primary, shade: '900' }), function (el) {
+        return el.style.textDecoration = 'underline';
+      }])(el);
     }
   }), (0, _jsuaStyle.when)('active', function (el) {
     if (el.jsuaStyleHasState('selectable')) {
-      material.color({ color: colors.primary, shade: '900' });
+      (0, _jsuaStyle.map)(_mappers2.default.label(), [material.color({ color: colors.primary, shade: '900' }), function (el) {
+        return el.style.textDecoration = 'underline';
+      }])(el);
     }
   }), (0, _jsuaStyle.when)('selected', (0, _jsuaStyle.map)(_mappers2.default.label(), [function (el) {
     return el.style.color = 'inherit';
@@ -8037,7 +8106,57 @@ function highlightLabel() {
   }])), (0, _jsuaStyle.on)('mouseover', (0, _jsuaStyle.setState)('hover')), (0, _jsuaStyle.on)('mouseout', (0, _jsuaStyle.clearState)('hover')), (0, _jsuaStyle.on)('mousedown', (0, _jsuaStyle.setState)('active')), (0, _jsuaStyle.on)('mouseup', (0, _jsuaStyle.clearState)('active')), (0, _jsuaStyle.setState)('normal')];
 }
 
-},{"../colors":49,"../mappers":52,"@lynx-json/jsua-material":75,"@lynx-json/jsua-style":93}],60:[function(require,module,exports){
+function inBanner() {
+  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  return material.flatButton({ backgroundColor: colors.primary });
+}
+
+},{"../colors":49,"../mappers":52,"@lynx-json/jsua-material":79,"@lynx-json/jsua-style":98}],62:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = table;
+
+var _jsuaMaterial = require('@lynx-json/jsua-material');
+
+var material = _interopRequireWildcard(_jsuaMaterial);
+
+var _colors = require('../colors');
+
+var colors = _interopRequireWildcard(_colors);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function table() {
+  return [material.table.auto(), material.color({ color: 'Black', opacity: 0.54 })];
+}
+
+},{"../colors":49,"@lynx-json/jsua-material":79}],63:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = table;
+
+var _jsuaMaterial = require('@lynx-json/jsua-material');
+
+var material = _interopRequireWildcard(_jsuaMaterial);
+
+var _colors = require('../colors');
+
+var colors = _interopRequireWildcard(_colors);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function table() {
+  return [material.textInput({ theme: 'light', focusColor: colors.primary })];
+}
+
+},{"../colors":49,"@lynx-json/jsua-material":79}],64:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8071,7 +8190,7 @@ function lockSelectable(name, fn) {
   return [(0, _jsuaStyle.lock)('selectable'), (0, _jsuaStyle.context)(name), fn];
 }
 
-},{"./mappers":52,"@lynx-json/jsua-lynx":20,"@lynx-json/jsua-style":93}],61:[function(require,module,exports){
+},{"./mappers":52,"@lynx-json/jsua-lynx":20,"@lynx-json/jsua-style":98}],65:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8150,32 +8269,7 @@ background.card = function () {
 background.menu = background.card;
 background.dialog = background.card;
 background.hover = background.appBar;
-},{"./color-palette":65,"./util":87}],62:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = borderRadius;
-
-var _jsuaStyle = require('@lynx-json/jsua-style');
-
-var _filters = require('./filters');
-
-var _filters2 = _interopRequireDefault(_filters);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function borderRadius(value) {
-  return [function (el) {
-    return el.style.borderRadius = value;
-  }, (0, _jsuaStyle.adjust)([(0, _jsuaStyle.map)(_jsuaStyle.mappers.realChildren(_filters2.default.shouldNegateContainerPadding()), [(0, _jsuaStyle.filter)(':first-child', function (el) {
-    return el.style.borderRadius = value + ' 0px';
-  }), (0, _jsuaStyle.filter)(':last-child', function (el) {
-    return el.style.borderRadius = '0px ' + value;
-  })])])];
-}
-},{"./filters":70,"@lynx-json/jsua-style":93}],63:[function(require,module,exports){
+},{"./color-palette":68,"./util":92}],66:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8248,50 +8342,130 @@ border.right = function rightBorder() {
     return el.style.borderRight = (options.width || '1px') + " solid " + getDividerColor(options);
   };
 };
-},{"./color-palette":65,"./util":87}],64:[function(require,module,exports){
+},{"./color-palette":68,"./util":92}],67:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = card;
+exports.default = expansionPanel;
 
 var _jsuaStyle = require('@lynx-json/jsua-style');
 
-var _view = require('./view');
+var _color = require('./color');
 
-var _view2 = _interopRequireDefault(_view);
+var _color2 = _interopRequireDefault(_color);
 
 var _elevation = require('./elevation');
 
 var _elevation2 = _interopRequireDefault(_elevation);
 
-var _background = require('./background');
+var _border = require('./border');
 
-var _background2 = _interopRequireDefault(_background);
-
-var _padding = require('./padding');
-
-var _padding2 = _interopRequireDefault(_padding);
-
-var _borderRadius = require('./border-radius');
-
-var _borderRadius2 = _interopRequireDefault(_borderRadius);
+var _border2 = _interopRequireDefault(_border);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function card() {
-  return [(0, _view2.default)(), (0, _jsuaStyle.map)(_jsuaStyle.mappers.slot('content'), [function (el) {
-    return el.style.display = 'grid';
+function expansionPanel() {
+  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  options.theme = options.theme || "light";
+
+  var innerHTML = '\n    <div role="presentation" data-jsua-style-slot="content-wrapper">\n      <div data-jsua-style-slot="content" role="presentation"></div>\n    </div>\n    <div role="presentation" data-jsua-style-slot="footer-wrapper">\n      <div data-jsua-style-slot="footer" role="presentation"></div>\n      <div data-jsua-style-slot="toggle" role="presentation"><i role="presentation" class="material-icons">keyboard_arrow_down</i></div>\n    </div>\n  ';
+
+  var maxHeight = 300;
+
+  return [(0, _jsuaStyle.component)('material-card', innerHTML), (0, _jsuaStyle.slot)('footer', options.footerMapper), _elevation2.default.card(), function (el) {
+    return el.style.display = 'flex';
   }, function (el) {
-    return el.style.gridGap = '16px';
+    return el.style.flexDirection = 'column';
   }, function (el) {
-    return el.style.gridTemplateColumns = '1fr';
+    return el.style.alignItems = 'stretch';
   }, function (el) {
-    return el.style.alignContent = 'start';
-  }]), _elevation2.default.card(), _background2.default.card(), (0, _padding2.default)('16px'), (0, _borderRadius2.default)('2px')];
+    return el.style.justifyContent = 'space-between';
+  }, function (el) {
+    return el.style.borderRadius = '2px';
+  }, (0, _jsuaStyle.map)(_jsuaStyle.mappers.slot('footer-wrapper'), [function (el) {
+    return el.style.flexGrow = 0;
+  }, function (el) {
+    return el.style.cursor = 'default';
+  }, function (el) {
+    return el.style.display = 'flex';
+  }, function (el) {
+    return el.style.flexDirection = 'row';
+  }, function (el) {
+    return el.style.flexWrap = 'nowrap';
+  }, function (el) {
+    return el.style.alignItems = 'center';
+  }, function (el) {
+    return el.style.paddingLeft = '24px';
+  }, function (el) {
+    return el.style.paddingRight = '24px';
+  }, function (el) {
+    return el.style.minHeight = '48px';
+  }, function (el) {
+    return el.style.transition = 'min-height 175ms ease-in-out';
+  }, (0, _jsuaStyle.on)('click', function (el, evt) {
+    (0, _jsuaStyle.map)(_jsuaStyle.mappers.component(), (0, _jsuaStyle.toggleState)('open'))(el);
+    evt.stopPropagation();
+    evt.preventDefault();
+  })]), (0, _jsuaStyle.map)(_jsuaStyle.mappers.slot('footer'), function (el) {
+    return el.style.flexGrow = 1;
+  }), (0, _jsuaStyle.map)(_jsuaStyle.mappers.slot('toggle'), [function (el) {
+    return el.style.display = 'flex';
+  }, function (el) {
+    return el.style.alignItems = 'center';
+  }, function (el) {
+    return el.style.marginLeft = '16px';
+  }, (0, _color2.default)({ color: options.color, opacity: 0.38, theme: options.theme }), (0, _jsuaStyle.select)('i.material-icons', [function (el) {
+    return el.style.width = '24px';
+  }, function (el) {
+    return el.style.height = '24px';
+  }, function (el) {
+    return el.style.overflow = 'hidden';
+  }, function (el) {
+    return el.style.cursor = 'default';
+  }, function (el) {
+    return el.style.borderRadius = '2px';
+  }, (0, _jsuaStyle.when)('normal', function (el) {
+    return el.style.border = '1px solid transparent';
+  }), (0, _jsuaStyle.when)('hover', (0, _border2.default)(options)), (0, _jsuaStyle.on)('mouseenter', (0, _jsuaStyle.setState)('hover')), (0, _jsuaStyle.on)('mouseleave', (0, _jsuaStyle.clearState)('hover')), (0, _jsuaStyle.setState)('normal')])]), (0, _jsuaStyle.map)(_jsuaStyle.mappers.slot('content-wrapper'), [function (el) {
+    return el.style.flexGrow = 1;
+  }, function (el) {
+    return el.style.display = 'block';
+  }, function (el) {
+    return el.style.paddingLeft = '24px';
+  }, function (el) {
+    return el.style.paddingRight = '24px';
+  }, function (el) {
+    return el.style.transition = 'max-height 175ms ease-in-out';
+  }, function (el) {
+    return el.style.overflowY = 'hidden';
+  }, function (el) {
+    return el.style.overflowX = 'hidden';
+  }]), (0, _jsuaStyle.map)(_jsuaStyle.mappers.slot('content'), function (el) {
+    return el.style.paddingTop = '16px';
+  }), (0, _jsuaStyle.when)('normal', [(0, _jsuaStyle.map)(_jsuaStyle.mappers.slot('footer-wrapper'), [function (el) {
+    return el.style.minHeight = '48px';
+  }]), (0, _jsuaStyle.map)(_jsuaStyle.mappers.slot('toggle'), [(0, _jsuaStyle.select)('i.material-icons', function (el) {
+    return el.textContent = "keyboard_arrow_down";
+  }), function (el) {
+    return el.style.display = 'none';
+  }]), (0, _jsuaStyle.map)(_jsuaStyle.mappers.slot('content-wrapper'), [function (el) {
+    return el.style.maxHeight = maxHeight + 'px';
+  }])]), (0, _jsuaStyle.when)('open', [(0, _jsuaStyle.map)(_jsuaStyle.mappers.slot('footer-wrapper'), [function (el) {
+    return el.style.minHeight = '64px';
+  }]), (0, _jsuaStyle.map)(_jsuaStyle.mappers.slot('toggle'), [(0, _jsuaStyle.select)('i.material-icons', function (el) {
+    return el.textContent = "keyboard_arrow_up";
+  })]), (0, _jsuaStyle.map)(_jsuaStyle.mappers.slot('content-wrapper'), [function (el) {
+    return el.style.maxHeight = el.firstElementChild.offsetHeight + 'px';
+  }])]), (0, _jsuaStyle.when)('overflow', (0, _jsuaStyle.map)(_jsuaStyle.mappers.slot('toggle'), function (el) {
+    return el.style.display = 'flex';
+  })), (0, _jsuaStyle.adjust)([(0, _jsuaStyle.clearState)('overflow'), (0, _jsuaStyle.filter)(function (el) {
+    return el.firstElementChild.firstElementChild.offsetHeight > maxHeight;
+  }, [(0, _jsuaStyle.setState)('overflow')])]), (0, _jsuaStyle.setState)('normal')];
 }
-},{"./background":61,"./border-radius":62,"./elevation":68,"./padding":79,"./view":88,"@lynx-json/jsua-style":93}],65:[function(require,module,exports){
+},{"./border":66,"./color":69,"./elevation":71,"@lynx-json/jsua-style":98}],68:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8711,21 +8885,21 @@ function getColor(name, shade) {
 //   const blueCoefficient = 0.0722
 //   const lowGammaAdjustCoefficient = 1 / 12.92
 // }
-},{}],66:[function(require,module,exports){
-"use strict";
+},{}],69:[function(require,module,exports){
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = color;
 
-var _jsuaStyle = require("@lynx-json/jsua-style");
+var _jsuaStyle = require('@lynx-json/jsua-style');
 
-var _colorPalette = require("./color-palette");
+var _colorPalette = require('./color-palette');
 
 var colorPalette = _interopRequireWildcard(_colorPalette);
 
-var _util = require("./util");
+var _util = require('./util');
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -8736,23 +8910,18 @@ function color() {
     options.opacity = options.opacity || 1;
   }
 
-  options.theme = options.theme;
-  options.color = options.color || (options.theme === "light" ? "#000000" : "#FFFFFF");
-  options.opacity = options.opacity || (options.theme === "light" ? 1 : 0.87);
+  options.theme = options.theme || 'light';
+  options.color = options.color || (options.theme === 'light' ? '#000000' : '#FFFFFF');
+  options.opacity = options.opacity || (options.theme === 'light' ? 1 : 0.87);
 
   return [(0, _jsuaStyle.filter)(function () {
     return !!options.color;
   }, function (el) {
-    var color = options.color;
-
-    if (typeof color === 'function') {
-      color = options.color();
-    }
-    color = colorPalette.getColor(color, options.shade);
+    var color = colorPalette.getColor(options.color, options.shade);
     el.style.color = (0, _util.rgba)(color, options.opacity);
   })];
 }
-},{"./color-palette":65,"./util":87,"@lynx-json/jsua-style":93}],67:[function(require,module,exports){
+},{"./color-palette":68,"./util":92,"@lynx-json/jsua-style":98}],70:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8779,7 +8948,7 @@ function container() {
     return el.style.alignContent = 'start';
   }])];
 }
-},{"./view":88,"@lynx-json/jsua-style":93}],68:[function(require,module,exports){
+},{"./view":93,"@lynx-json/jsua-style":98}],71:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8812,7 +8981,7 @@ elevation.menu = function (el) {
 elevation.appBar = function (el) {
   return elevation(4);
 };
-},{}],69:[function(require,module,exports){
+},{}],72:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8874,6 +9043,10 @@ function expansionPanel() {
   })]), (0, _jsuaStyle.map)(_jsuaStyle.mappers.slot('header'), function (el) {
     return el.style.flexGrow = 1;
   }), (0, _jsuaStyle.map)(_jsuaStyle.mappers.slot('toggle'), [function (el) {
+    return el.style.display = 'flex';
+  }, function (el) {
+    return el.style.alignItems = 'center';
+  }, function (el) {
     return el.style.marginLeft = '16px';
   }, (0, _color2.default)({ color: options.color, opacity: 0.38, theme: options.theme }), (0, _jsuaStyle.select)('i.material-icons', [function (el) {
     return el.style.width = '24px';
@@ -8919,7 +9092,7 @@ function expansionPanel() {
     return el.style.maxHeight = el.firstElementChild.offsetHeight + 'px';
   }])]), (0, _jsuaStyle.setState)('normal')];
 }
-},{"./border":63,"./color":66,"./elevation":68,"@lynx-json/jsua-style":93}],70:[function(require,module,exports){
+},{"./border":66,"./color":69,"./elevation":71,"@lynx-json/jsua-style":98}],73:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8944,7 +9117,75 @@ exports.default = Object.assign({
     };
   }
 }, style.filters);
-},{"@lynx-json/jsua-style":93}],71:[function(require,module,exports){
+},{"@lynx-json/jsua-style":98}],74:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = flatButton;
+
+var _jsuaStyle = require('@lynx-json/jsua-style');
+
+var _background = require('./background');
+
+var _background2 = _interopRequireDefault(_background);
+
+var _color = require('./color');
+
+var _color2 = _interopRequireDefault(_color);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function flatButton() {
+  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  options.color = options.color || 'Grey';
+  return [function (el) {
+    return el.style.paddingTop = '6px';
+  }, function (el) {
+    return el.style.paddingBottom = '6px';
+  }, function (el) {
+    return el.style.outline = 'none';
+  }, function (el) {
+    return el.style.cursor = 'pointer';
+  }, function (el) {
+    return el.style.minHeight = '36px';
+  }, function (el) {
+    return el.style.minWidth = '36px';
+  }, function (el) {
+    return el.style.paddingLeft = '16px';
+  }, function (el) {
+    return el.style.paddingRight = '16px';
+  }, function (el) {
+    return el.style.borderRadius = '2px';
+  }, (0, _jsuaStyle.map)(_jsuaStyle.mappers.slot('content'), [function (el) {
+    return el.style.cursor = 'pointer';
+  }, function (el) {
+    return el.style.alignItems = 'center';
+  }, function (el) {
+    return el.style.justifyContent = 'center';
+  }, function (el) {
+    return el.style.justifyItems = 'center';
+  }]), (0, _jsuaStyle.when)('normal', [function (el) {
+    return el.style.display = 'inline-flex';
+  }, function (el) {
+    return el.style.backgroundColor = 'inherit';
+  }, (0, _jsuaStyle.map)(options.labelMapper, [function (el) {
+    return el.style.fontWeight = 'normal';
+  }, function (el) {
+    return el.style.color = 'inherit';
+  }, function (el) {
+    return el.style.textDecoration = 'none';
+  }])]), (0, _jsuaStyle.when)('selectable', (0, _jsuaStyle.map)(options.labelMapper, [function (el) {
+    return el.style.fontWeight = 'normal';
+  }, (0, _color2.default)({ color: options.color, shade: '700' })])), (0, _jsuaStyle.when)('selected', (0, _jsuaStyle.map)(options.labelMapper, [function (el) {
+    return el.style.color = 'inherit';
+  }, function (el) {
+    return el.style.fontWeight = 'bold';
+  }])), (0, _jsuaStyle.when)('focus', [(0, _background2.default)({ backgroundColor: options.color, opacity: 0.12 })]), (0, _jsuaStyle.when)('pressed', [(0, _background2.default)({ backgroundColor: options.color, opacity: 0.4 })]), (0, _jsuaStyle.on)('focusin', (0, _jsuaStyle.setState)('focus')), (0, _jsuaStyle.on)('focusout', (0, _jsuaStyle.clearState)('focus')), (0, _jsuaStyle.on)('mousedown', (0, _jsuaStyle.setState)('pressed')), (0, _jsuaStyle.on)('mouseup', (0, _jsuaStyle.clearState)('pressed')), (0, _jsuaStyle.on)('touchstart', (0, _jsuaStyle.setState)('pressed')), (0, _jsuaStyle.on)('touchend', (0, _jsuaStyle.clearState)('pressed'))];
+}
+},{"./background":65,"./color":69,"@lynx-json/jsua-style":98}],75:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8972,12 +9213,28 @@ function footer() {
   }, function (el) {
     return el.style.gridGap = '16px';
   }, function (el) {
-    return el.style.alignContent = 'center';
+    return el.style.justifyContent = 'start';
   }, function (el) {
     return el.style.gridTemplateColumns = 'repeat(auto-fit, minmax(160px, 1fr))';
-  }])];
+  }, (0, _jsuaStyle.filter)(function (el) {
+    return el.children.length === 1;
+  }, function (el) {
+    return el.style.gridTemplateColumns = '1fr';
+  }), (0, _jsuaStyle.filter)(function (el) {
+    return el.children.length === 2;
+  }, function (el) {
+    return el.style.gridTemplateColumns = 'auto 1fr';
+  }), (0, _jsuaStyle.filter)(function (el) {
+    return el.children.length === 3;
+  }, [function (el) {
+    return el.style.gridTemplateColumns = '1fr 2fr 1fr';
+  }, (0, _jsuaStyle.map)(_jsuaStyle.mappers.nth(2, _jsuaStyle.mappers.children()), function (el) {
+    return el.style.justifySelf = 'center';
+  }), (0, _jsuaStyle.map)(_jsuaStyle.mappers.last(_jsuaStyle.mappers.children()), function (el) {
+    return el.style.justifySelf = 'end';
+  })])])];
 }
-},{"./standing-line":82,"./view":88,"@lynx-json/jsua-style":93}],72:[function(require,module,exports){
+},{"./standing-line":86,"./view":93,"@lynx-json/jsua-style":98}],76:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9183,7 +9440,7 @@ function grid() {
 }
 
 grid.column = column;
-},{"@lynx-json/jsua-style":93}],73:[function(require,module,exports){
+},{"@lynx-json/jsua-style":98}],77:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9226,7 +9483,7 @@ function group() {
     return el.style.flexBasis = '100%';
   }))])];
 }
-},{"./filters":70,"./view":88,"@lynx-json/jsua-style":93}],74:[function(require,module,exports){
+},{"./filters":73,"./view":93,"@lynx-json/jsua-style":98}],78:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9256,6 +9513,8 @@ function header() {
   }, function (el) {
     return el.style.alignContent = 'center';
   }, function (el) {
+    return el.style.alignItems = 'center';
+  }, function (el) {
     return el.style.gridTemplateColumns = 'repeat(auto-fit, minmax(160px, 1fr))';
   }, (0, _jsuaStyle.filter)(function (el) {
     return el.children.length === 1;
@@ -9275,13 +9534,13 @@ function header() {
     return el.style.justifySelf = 'end';
   })])])];
 }
-},{"./standing-line":82,"./view":88,"@lynx-json/jsua-style":93}],75:[function(require,module,exports){
+},{"./standing-line":86,"./view":93,"@lynx-json/jsua-style":98}],79:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.tableRow = exports.table = exports.list = exports.footer = exports.set = exports.negateContainerPadding = exports.padding = exports.group = exports.color = exports.border = exports.colorPalette = exports.header = exports.textField = exports.text = exports.raisedButton = exports.menu = exports.grid = exports.expansionPanel = exports.elevation = exports.container = exports.card = exports.background = undefined;
+exports.flatButton = exports.textInput = exports.tableRow = exports.table = exports.list = exports.footer = exports.set = exports.negateContainerPadding = exports.padding = exports.group = exports.color = exports.border = exports.colorPalette = exports.header = exports.textField = exports.text = exports.raisedButton = exports.menu = exports.grid = exports.expansionPanel = exports.elevation = exports.container = exports.card = exports.background = undefined;
 
 var _background = require('./background');
 
@@ -9371,6 +9630,14 @@ var _tableRow = require('./table-row');
 
 var _tableRow2 = _interopRequireDefault(_tableRow);
 
+var _textInput = require('./text-input');
+
+var _textInput2 = _interopRequireDefault(_textInput);
+
+var _flatButton = require('./flat-button');
+
+var _flatButton2 = _interopRequireDefault(_flatButton);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -9397,7 +9664,9 @@ exports.footer = _footer2.default;
 exports.list = _list2.default;
 exports.table = _table2.default;
 exports.tableRow = _tableRow2.default;
-},{"./background":61,"./border":63,"./card":64,"./color":66,"./color-palette":65,"./container":67,"./elevation":68,"./expansion-panel":69,"./footer":71,"./grid":72,"./group":73,"./header":74,"./list":76,"./menu":77,"./negate-container-padding":78,"./padding":79,"./raised-button":80,"./set":81,"./table":84,"./table-row":83,"./text":86,"./text-field":85}],76:[function(require,module,exports){
+exports.textInput = _textInput2.default;
+exports.flatButton = _flatButton2.default;
+},{"./background":65,"./border":66,"./card":67,"./color":69,"./color-palette":68,"./container":70,"./elevation":71,"./expansion-panel":72,"./flat-button":74,"./footer":75,"./grid":76,"./group":77,"./header":78,"./list":80,"./menu":81,"./negate-container-padding":82,"./padding":83,"./raised-button":84,"./set":85,"./table":88,"./table-row":87,"./text":91,"./text-field":89,"./text-input":90}],80:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9424,7 +9693,7 @@ function list() {
     return el.style.alignContent = 'start';
   }])];
 }
-},{"./view":88,"@lynx-json/jsua-style":93}],77:[function(require,module,exports){
+},{"./view":93,"@lynx-json/jsua-style":98}],81:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9651,7 +9920,7 @@ menu.item = function () {
 menu.header = function () {
   return [_jsuaStyle.component.slot("material-menu", "header")];
 };
-},{"./background":61,"./elevation":68,"./text":86,"./util":87,"@lynx-json/jsua-style":93}],78:[function(require,module,exports){
+},{"./background":65,"./elevation":71,"./text":91,"./util":92,"@lynx-json/jsua-style":98}],82:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9663,7 +9932,7 @@ function negateContainerPadding() {
     return el.setAttribute("data-jsua-material-negate-padding", true);
   };
 }
-},{}],79:[function(require,module,exports){
+},{}],83:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9692,7 +9961,39 @@ function padding(value) {
     return el.style.marginBottom = '-' + value;
   })])])];
 }
-},{"./filters":70,"@lynx-json/jsua-style":93}],80:[function(require,module,exports){
+
+padding.left = function (value) {
+  return [function (el) {
+    return el.style.paddingLeft = value;
+  }, (0, _jsuaStyle.adjust)([(0, _jsuaStyle.map)(_jsuaStyle.mappers.realChildren(_filters2.default.shouldNegateContainerPadding(), '[data-lynx-hints~=content]'), [function (el) {
+    return el.style.marginLeft = '-' + value;
+  }])])];
+};
+
+padding.right = function (value) {
+  return [function (el) {
+    return el.style.paddingRight = value;
+  }, (0, _jsuaStyle.adjust)([(0, _jsuaStyle.map)(_jsuaStyle.mappers.realChildren(_filters2.default.shouldNegateContainerPadding(), '[data-lynx-hints~=content]'), [function (el) {
+    return el.style.marginRight = '-' + value;
+  }])])];
+};
+
+padding.top = function (value) {
+  return [function (el) {
+    return el.style.padding = value;
+  }, (0, _jsuaStyle.adjust)([(0, _jsuaStyle.map)(_jsuaStyle.mappers.first(_jsuaStyle.mappers.realChildren("*", '[data-lynx-hints~=content]')), [(0, _jsuaStyle.filter)(_filters2.default.shouldNegateContainerPadding(), function (el) {
+    return el.style.marginTop = '-' + value;
+  })])])];
+};
+
+padding.bottom = function (value) {
+  return [function (el) {
+    return el.style.padding = value;
+  }, (0, _jsuaStyle.adjust)([(0, _jsuaStyle.map)(_jsuaStyle.mappers.last(_jsuaStyle.mappers.realChildren("*", '[data-lynx-hints~=content]')), [(0, _jsuaStyle.filter)(_filters2.default.shouldNegateContainerPadding(), function (el) {
+    return el.style.marginBottom = '-' + value;
+  })])])];
+};
+},{"./filters":73,"@lynx-json/jsua-style":98}],84:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9776,7 +10077,7 @@ function raisedButton(options) {
     }]);
   };
 }
-},{"./elevation":68,"./text":86,"./util":87,"@lynx-json/jsua-style":93}],81:[function(require,module,exports){
+},{"./elevation":71,"./text":91,"./util":92,"@lynx-json/jsua-style":98}],85:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9813,7 +10114,9 @@ set.auto = function () {
     return el.style.gridTemplateColumns = Array.from(el.children).map(function (el) {
       return "auto";
     }).join(" ");
-  }]), (0, _jsuaStyle.adjust)([(0, _jsuaStyle.map)(_jsuaStyle.mappers.slot('content'), function (el) {
+  }, function (el) {
+    return el.style.justifyContent = 'start';
+  }, function (el) {
     var maxNaturalWidth = Array.from(el.children).filter(function (el) {
       return !_filters2.default.shouldHaveStandingLine()(el);
     }).map(function (el) {
@@ -9821,10 +10124,12 @@ set.auto = function () {
     }).reduce(function (acc, cur) {
       return Math.max(acc, cur);
     }, 0);
-    el.style.gridTemplateColumns = 'repeat(auto-fit, minmax(' + Math.max(maxNaturalWidth, 300) + 'px, 1fr))';
-  })])];
+    var minimumWidth = Math.max(maxNaturalWidth, el.offsetWidth / 3);
+    el.style.gridTemplateColumns = 'repeat(auto-fit, minmax(' + minimumWidth + 'px, 1fr))';
+    el.style.justifyContent = 'stretch';
+  }])];
 };
-},{"./filters":70,"./view":88,"@lynx-json/jsua-style":93}],82:[function(require,module,exports){
+},{"./filters":73,"./view":93,"@lynx-json/jsua-style":98}],86:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9836,7 +10141,7 @@ function standingLine() {
     return el.setAttribute("data-jsua-material-standing-line", true);
   };
 }
-},{}],83:[function(require,module,exports){
+},{}],87:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9877,7 +10182,7 @@ tableRow.auto = function autoSizedTableRow() {
     }).join(" ");
   }])];
 };
-},{"./view":88,"@lynx-json/jsua-style":93}],84:[function(require,module,exports){
+},{"./view":93,"@lynx-json/jsua-style":98}],88:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9899,10 +10204,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function table() {
   return [(0, _view2.default)(), (0, _jsuaStyle.map)(_jsuaStyle.mappers.slot('content'), [function (el) {
-    return el.style.display = 'grid';
-  }, function (el) {
     return el.style.gridGap = '16px';
-  }])];
+  }, function (el) {
+    return el.style.display = 'none';
+  }]), (0, _jsuaStyle.adjust)(function (el) {
+    var maxWidth = el.offsetWidth;
+    (0, _jsuaStyle.query)(el).map(_jsuaStyle.mappers.slot('content')).each([function (el) {
+      return el.style.maxWidth = maxWidth + 'px';
+    }, function (el) {
+      return el.style.display = 'grid';
+    }, function (el) {
+      return el.style.overflowX = 'auto';
+    }]);
+  })];
 }
 
 table.auto = function () {
@@ -9940,15 +10254,16 @@ function adjustAlignment() {
 
       cells.forEach(function measureCell(cell, index) {
         maxCellProportions[index] = Math.max(maxCellProportions[index] || 0, cell.offsetWidth / totalWidth);
-        maxWidths[index] = Math.max(maxWidths[index] || 0, cell.offsetWidth);
-        minWidths[index] = Math.min(minWidths[index] || cell.offsetWidth, cell.offsetWidth);
+
+        if (index === 0) {
+          maxWidths[index] = Math.max(maxWidths[index] || 0, cell.offsetWidth);
+          minWidths[index] = Math.min(minWidths[index] || cell.offsetWidth, cell.offsetWidth);
+        }
       });
     });
 
     var templateColumns = maxCellProportions.map(getColumnFraction).map(function (fr, index) {
-      console.log("MAX", maxWidths[index]);
-      console.log("MIN", minWidths[index]);
-      if (maxWidths[index] === minWidths[index]) {
+      if (index === 0 && maxWidths[index] === minWidths[index]) {
         return 'auto';
       }
       return fr + 'fr';
@@ -9963,7 +10278,7 @@ function adjustAlignment() {
     });
   };
 }
-},{"./filters":70,"./view":88,"@lynx-json/jsua-style":93}],85:[function(require,module,exports){
+},{"./filters":73,"./view":93,"@lynx-json/jsua-style":98}],89:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10144,7 +10459,53 @@ textField.dropdown = function (options) {
     return el.style.backgroundSize = "24px 24px";
   }];
 };
-},{"./text":86,"./util":87,"@lynx-json/jsua-style":93}],86:[function(require,module,exports){
+},{"./text":91,"./util":92,"@lynx-json/jsua-style":98}],90:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = textInput;
+
+var _jsuaStyle = require('@lynx-json/jsua-style');
+
+var _border = require('./border');
+
+var _border2 = _interopRequireDefault(_border);
+
+var _text = require('./text');
+
+var _text2 = _interopRequireDefault(_text);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function textInput() {
+  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  options.invalidColor = options.invalidColor || 'Red';
+  options.focusColor = options.focusColor || 'Grey';
+
+  return [function (el) {
+    return el.style.display = 'flex';
+  }, function (el) {
+    return el.style.flexDirection = 'column';
+  }, function (el) {
+    return el.style.alignItems = 'stretch';
+  }, (0, _jsuaStyle.select)('input, textarea', [_text2.default.input(), function (el) {
+    return el.style.backgroundColor = "inherit";
+  }, function (el) {
+    return el.style.outline = "none";
+  }, function (el) {
+    return el.style.border = "none";
+  }, function (el) {
+    return el.style.paddingBottom = "7px";
+  }]), (0, _jsuaStyle.when)('normal', [function (el) {
+    return el.style.display = 'flex';
+  }, _border2.default.bottom({ theme: options.theme })]), (0, _jsuaStyle.when)('focus', _border2.default.bottom({ color: options.focusColor, width: '2px', opacity: 1 })), (0, _jsuaStyle.when)('validity', 'invalid', _border2.default.bottom({ color: options.invalidColor, opacity: 1 })), (0, _jsuaStyle.on)('focusin', (0, _jsuaStyle.setState)('focus')), (0, _jsuaStyle.on)('focusout', (0, _jsuaStyle.clearState)('focus')), (0, _jsuaStyle.when)('visibility', 'hidden', function (el) {
+    return el.style.display = 'none';
+  }), (0, _jsuaStyle.setState)('normal')];
+}
+},{"./border":66,"./text":91,"@lynx-json/jsua-style":98}],91:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10158,22 +10519,16 @@ var _colorPalette = require("./color-palette");
 
 var colorPalette = _interopRequireWildcard(_colorPalette);
 
-var _util = require("./util");
+var _color = require("./color");
+
+var _color2 = _interopRequireDefault(_color);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function text() {
   var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  if (options.color || options.theme) {
-    if (options.color) {
-      options.opacity = options.opacity || 1;
-    }
-
-    options.theme = options.theme;
-    options.color = options.color || (options.theme === "light" ? "#000000" : "#FFFFFF");
-    options.opacity = options.opacity || (options.theme === "light" ? 1 : 0.87);
-  }
 
   return [function (el) {
     return el.style.fontFamily = "Roboto, sans-serif";
@@ -10181,18 +10536,7 @@ function text() {
     return el.style.fontWeight = "400";
   }, function (el) {
     return el.style.fontSize = "14px";
-  }, (0, _jsuaStyle.filter)(function () {
-    return !!options.color;
-  }, function (el) {
-    var color = options.color;
-
-    // TODO: Remove. Obsolete.
-    if (typeof color === 'function') {
-      color = options.color();
-    }
-    color = colorPalette.getColor(color);
-    el.style.color = (0, _util.rgba)(color, options.opacity);
-  })];
+  }];
 }
 
 text.display4 = function display4() {
@@ -10200,7 +10544,7 @@ text.display4 = function display4() {
 
   options.opacity = options.opacity || (options.theme === "light" ? 0.7 : 0.54);
 
-  return [text(options), function (el) {
+  return [(0, _color2.default)(options), function (el) {
     return el.style.fontWeight = "300";
   }, function (el) {
     return el.style.fontSize = "112px";
@@ -10212,7 +10556,7 @@ text.display3 = function display3() {
 
   options.opacity = options.opacity || (options.theme === "light" ? 0.7 : 0.54);
 
-  return [text(options), function (el) {
+  return [(0, _color2.default)(options), function (el) {
     return el.style.fontSize = "56px";
   }];
 };
@@ -10222,7 +10566,7 @@ text.display2 = function display2() {
 
   options.opacity = options.opacity || (options.theme === "light" ? 0.7 : 0.54);
 
-  return [text(options), function (el) {
+  return [(0, _color2.default)(options), function (el) {
     return el.style.fontSize = "45px";
   }, function (el) {
     return el.style.lineHeight = "48px";
@@ -10234,7 +10578,7 @@ text.display = function display() {
 
   options.opacity = options.opacity || (options.theme === "light" ? 0.7 : 0.54);
 
-  return [text(options), function (el) {
+  return [(0, _color2.default)(options), function (el) {
     return el.style.fontSize = "34px";
   }, function (el) {
     return el.style.lineHeight = "40px";
@@ -10244,7 +10588,7 @@ text.display = function display() {
 text.headline = function headline() {
   var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  return [text(options), function (el) {
+  return [function (el) {
     return el.style.fontSize = "24px";
   }, function (el) {
     return el.style.lineHeight = "32px";
@@ -10252,9 +10596,7 @@ text.headline = function headline() {
 };
 
 text.title = function title() {
-  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  return [text(options), function (el) {
+  return [function (el) {
     return el.style.fontWeight = "500";
   }, function (el) {
     return el.style.fontSize = "20px";
@@ -10262,9 +10604,7 @@ text.title = function title() {
 };
 
 text.subheading2 = function subheading2() {
-  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  return [text(options), function (el) {
+  return [function (el) {
     return el.style.fontSize = "16px";
   }, function (el) {
     return el.style.lineHeight = "28px";
@@ -10272,9 +10612,7 @@ text.subheading2 = function subheading2() {
 };
 
 text.subheading = function subheading() {
-  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  return [text(options), function (el) {
+  return [function (el) {
     return el.style.fontSize = "16px";
   }, function (el) {
     return el.style.lineHeight = "24px";
@@ -10282,9 +10620,7 @@ text.subheading = function subheading() {
 };
 
 text.body2 = function body2() {
-  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  return [text(options), function (el) {
+  return [function (el) {
     return el.style.fontWeight = "500";
   }, function (el) {
     return el.style.fontSize = "14px";
@@ -10294,9 +10630,7 @@ text.body2 = function body2() {
 };
 
 text.body = function body() {
-  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  return [text(options), function (el) {
+  return [function (el) {
     return el.style.fontSize = "14px";
   }, function (el) {
     return el.style.lineHeight = "24px";
@@ -10304,9 +10638,7 @@ text.body = function body() {
 };
 
 text.caption = function caption() {
-  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  return [text(options), function (el) {
+  return [function (el) {
     return el.style.fontSize = "12px";
   }, function (el) {
     return el.style.lineHeight = "14px";
@@ -10314,9 +10646,7 @@ text.caption = function caption() {
 };
 
 text.button = function button() {
-  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  return [text(options), function (el) {
+  return [function (el) {
     return el.style.fontSize = "14px";
   }, function (el) {
     return el.style.fontWeight = "500";
@@ -10326,15 +10656,13 @@ text.button = function button() {
 };
 
 text.input = function input() {
-  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  return [text(options), function (el) {
+  return [function (el) {
     return el.style.fontSize = "16px";
   }, function (el) {
     return el.style.lineHeight = "18px";
   }];
 };
-},{"./color-palette":65,"./util":87,"@lynx-json/jsua-style":93}],87:[function(require,module,exports){
+},{"./color":69,"./color-palette":68,"@lynx-json/jsua-style":98}],92:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10416,7 +10744,7 @@ function rgba(color, opacity) {
 
   return "rgba(" + r + ", " + g + ", " + b + ", " + opacity + ")";
 }
-},{"./color-palette":65,"@lynx-json/jsua-style":93}],88:[function(require,module,exports){
+},{"./color-palette":68,"@lynx-json/jsua-style":98}],93:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10438,7 +10766,7 @@ function view() {
     return el.style.display = 'none';
   }), (0, _jsuaStyle.setState)('normal')])];
 }
-},{"@lynx-json/jsua-style":93}],89:[function(require,module,exports){
+},{"@lynx-json/jsua-style":98}],94:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10460,7 +10788,7 @@ function adjust(fn) {
     });
   };
 }
-},{"./query":100}],90:[function(require,module,exports){
+},{"./query":105}],95:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10560,7 +10888,7 @@ component.slot = function (componentName, slotName) {
     });
   };
 };
-},{"./mappers":96,"./query":100,"./selectors":102,"./util":105}],91:[function(require,module,exports){
+},{"./mappers":101,"./query":105,"./selectors":107,"./util":110}],96:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10575,7 +10903,7 @@ function context(name) {
     (0, _util.addToken)(element, "data-jsua-context", name);
   };
 }
-},{"./util":105}],92:[function(require,module,exports){
+},{"./util":110}],97:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10599,7 +10927,7 @@ function filter(filter, fn) {
     }
   };
 }
-},{"./query":100}],93:[function(require,module,exports){
+},{"./query":105}],98:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10695,7 +11023,7 @@ exports.adjust = _adjust2.default;
 exports.applyAdjustments = _util.applyAdjustments;
 exports.addToken = _util.addToken;
 exports.hasToken = _util.hasToken;
-},{"./adjust":89,"./component":90,"./context":91,"./filter":92,"./lock":94,"./map":95,"./mappers":96,"./media":97,"./note":98,"./on":99,"./query":100,"./select":101,"./selectors":102,"./slot":103,"./state":104,"./util":105}],94:[function(require,module,exports){
+},{"./adjust":94,"./component":95,"./context":96,"./filter":97,"./lock":99,"./map":100,"./mappers":101,"./media":102,"./note":103,"./on":104,"./query":105,"./select":106,"./selectors":107,"./slot":108,"./state":109,"./util":110}],99:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10725,7 +11053,7 @@ function lock(keyOrFn) {
     (0, _util.addToken)(element, "data-jsua-style-lock", key);
   };
 }
-},{"./util":105}],95:[function(require,module,exports){
+},{"./util":110}],100:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10749,7 +11077,7 @@ function map(mapper, fn) {
     }
   };
 }
-},{"./query":100}],96:[function(require,module,exports){
+},{"./query":105}],101:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11347,7 +11675,7 @@ function last(mapper) {
     return matches.length > 0 && matches[matches.length - 1];
   };
 }
-},{"./query":100,"./util":105}],97:[function(require,module,exports){
+},{"./query":105,"./util":110}],102:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11439,7 +11767,7 @@ function media(mediaQuery, fn) {
     }
   };
 }
-},{"./query":100,"./util":105}],98:[function(require,module,exports){
+},{"./query":105,"./util":110}],103:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11454,7 +11782,7 @@ function note(text) {
     (0, _util.addToken)(element, "data-jsua-style-notes", text);
   };
 }
-},{"./util":105}],99:[function(require,module,exports){
+},{"./util":110}],104:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11492,7 +11820,7 @@ function off(name) {
     }
   };
 }
-},{"./util":105}],100:[function(require,module,exports){
+},{"./util":110}],105:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11916,7 +12244,7 @@ function query(selection) {
 
   return q;
 }
-},{"./util":105}],101:[function(require,module,exports){
+},{"./util":110}],106:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11939,7 +12267,7 @@ function select(selector, fn) {
     }
   };
 }
-},{"./query":100}],102:[function(require,module,exports){
+},{"./query":105}],107:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12172,7 +12500,7 @@ function unlocked(key, selector) {
     return !(0, _util.hasToken)(element, "data-jsua-style-lock", key);
   };
 }
-},{"./mappers":96,"./query":100,"./util":105}],103:[function(require,module,exports){
+},{"./mappers":101,"./query":105,"./util":110}],108:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12195,7 +12523,7 @@ function slot(name, mapper) {
     }]);
   };
 }
-},{"./query":100}],104:[function(require,module,exports){
+},{"./query":105}],109:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12320,7 +12648,7 @@ function whenNot(state, valueOrFn, fn) {
     });
   };
 }
-},{"./util":105}],105:[function(require,module,exports){
+},{"./util":110}],110:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

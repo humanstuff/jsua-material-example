@@ -6,7 +6,7 @@ export default function () {
 
   return [
     map(() => document.body, [
-      material.text.body(),
+      material.text(),
       material.background.main({ theme: theme }),
       material.color({ theme: theme })
     ])
